@@ -10,8 +10,8 @@ Built using omniscient and es6 (webpack and the 6to5-loader).
 
 ### run
 
-`webpack -w`
+`npm run watch`
 
 ### build for prod
 
-`webpack -p`
+`npm run build`
