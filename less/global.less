@@ -1,0 +1,25 @@
+@import "vars";
+
+html { box-sizing: border-box; }
+*, *:before, *:after { box-sizing: inherit; }
+
+html, body {
+  height: 100%;
+  width: 100%;
+  .no-space();
+}
+
+body {
+  background-color: @color-bg;
+  .font();
+  text-transform: uppercase;
+  color: @color-text;
+
+  display: flex;
+}
+
+ul, li {
+  .no-space();
+  list-style-type: none;
+}
+

@@ -1,0 +1,31 @@
+@import "include";
+
+.guitar-fret {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+
+  height: 4rem;
+  text-align: center;
+
+  border: 0.4rem solid #333;
+  background-color: rgba(0, 0, 0, .15);
+  &.guitar-fret--all-notes {
+    background-color: rgba(0, 0, 0, .45);
+  }
+}
+
+.guitar-fret-note,
+.guitar-fret-dots {
+  flex: 1;
+}
+
+.guitar-fret-note {
+  font-size: @font-small;
+  .flex-center-contents();
+}
+
+.guitar-fret-dots {
+  display: flex;
+  justify-content: flex-end;
+}

@@ -1,0 +1,1 @@
+rsync -rtvz --exclude node_modules * wa.gd:~/public/scales/

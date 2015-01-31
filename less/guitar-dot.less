@@ -1,0 +1,13 @@
+@import "include";
+
+.guitar-dot {
+  flex: 1;
+
+  &.guitar-dot--root {
+    opacity: 0.4;
+  }
+
+  &:not(:last-child) {
+    border-right: 1px solid @color-bg;
+  }
+}

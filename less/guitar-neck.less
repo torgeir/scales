@@ -1,0 +1,18 @@
+@import "include";
+
+.guitar-neck {
+  .scroll-x();
+  overflow-y: hidden;
+}
+
+.guitar-neck-numbers {
+  display: flex;
+  min-width: @neck-min-width;
+}
+
+.guitar-neck-number {
+  flex: 1;
+  font-size: @font-small;
+  height: 2rem;
+  .flex-center-contents();
+}
