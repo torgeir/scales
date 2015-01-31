@@ -9,7 +9,8 @@ import '../less/guitar-neck.less';
 export default component(function GuitarNeck ({guitar, scales, selectedModes, selectedScales}) {
   return <div className="guitar-neck">
     {guitar.cursor('strings').toArray().map((root, i) =>
-      <GuitarString root={root}
+      <GuitarString key={i}
+                    root={root}
                     frets={guitar.cursor('frets')}
                     scales={scales}
                     selectedModes={selectedModes}

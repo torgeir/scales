@@ -6,11 +6,11 @@ import {scaleRange} from './scales';
 
 import '../less/guitar-string.less';
 
-export default component(function GuitarString ({root, frets, scales, selectedModes, selectedScales}) {
+export default component(function GuitarString ({key, root, frets, scales, selectedModes, selectedScales}) {
   let noteRange = scaleRange(root);
   let notes = frets.toArray().map(_ => noteRange.next());
 
-  return <ul className="guitar-string">
+  return <ul key={key} className="guitar-string">
     {frets.toArray().map((_, i) => {
       let fretNote = notes[i];
       let dots = scales.toArray().reduce((acc, scale, idx) => {
