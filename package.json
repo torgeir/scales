@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "watch": "webpack -w",
+    "watch": "node hot-reload-server",
     "build": "webpack -p"
   },
   "author": "",
@@ -23,6 +23,10 @@
     "react": "",
     "react-router": "",
     "style-loader": "",
-    "webpack": ""
+    "webpack": "^1.5.3",
+    "webpack-dev-server": "^1.7.0"
+  },
+  "devDependencies": {
+    "react-hot-loader": "^1.1.4"
   }
 }

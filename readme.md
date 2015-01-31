@@ -10,7 +10,7 @@ Built using omniscient and es6 (webpack and the 6to5-loader).
 
 `npm i`
 
-### run
+### watch (hot reloads with [react-hot-loader](https://github.com/gaearon/react-hot-loader)!)
 
 `npm run watch`
 

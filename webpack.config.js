@@ -1,18 +1,28 @@
+var webpack = require('webpack');
+
 module.exports = {
   context: __dirname,
-  entry: {
-    'app': './app.js'
-  },
+  entry: [
+    'webpack-dev-server/client?http://0.0.0.0:3000',
+    'webpack/hot/only-dev-server',
+    './app'
+  ],
   output: {
     path: __dirname + '/dist',
-    filename: '[name].entry.js'
+    filename: '[name].entry.js',
+    publicPath: '/dist'
   },
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoErrorsPlugin()
+  ],
   module: {
     loaders: [
       {
         test: /\.js$/,
         exclude: /node_modules/,
         loaders: [
+          'react-hot',
           '6to5-loader?experimental&optional=selfContained'
         ]
       },
