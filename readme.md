@@ -2,7 +2,7 @@ A guitarists guide to improvisation - look up any overlapping notes from differe
 
 [http://torgeir.github.io/scales](http://torgeir.github.io/scales)
 
-![Example](example.png)
+<img width="20%" src="example.png"/>
 
 Built using omniscient and es6 (webpack and the 6to5-loader).
 
