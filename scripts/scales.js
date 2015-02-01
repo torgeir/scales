@@ -2,8 +2,19 @@ import {range, color, rotateString} from './util';
 import Modes from './modes';
 import Intervals from './intervals';
 
-let C = scaleRange('c');
+let notes = [ 'c', 'c#', 'd', 'd#', 'e', 'f', 'f#', 'g', 'g#', 'a', 'a#', 'h' ];
+export let scaleRange = (root) => {
+  let index = notes.indexOf(root);
+  return {
+    next: function (i) {
+      let note = notes[index % notes.length];
+      index = index + (i || 1);
+      return note;
+    }
+  };
+};
 
+let C = scaleRange('c');
 export let AllNotes = range(12).map(_ => C.next());
 
 export let Scales = Object.keys(Intervals).reduce((acc, name) => {
@@ -17,7 +28,6 @@ export let AllScales = Object.keys(Scales);
 
 export function generateScale (scaleFn, color, scale, interval) {
   return AllNotes.reduce((acc, root) => {
-
     let modes = scaleFn(root).reduce((acc, notes, i) => {
       acc[Modes[i]] = { notes: notes, color: color() };
       return acc;
@@ -28,24 +38,12 @@ export function generateScale (scaleFn, color, scale, interval) {
   }, {});
 }
 
-export function scaleRange (root) {
-  let notes = [ 'c', 'c#', 'd', 'd#', 'e', 'f', 'f#', 'g', 'g#', 'a', 'a#', 'h' ];
-  let index = notes.indexOf(root);
-  return {
-    next: function (i) {
-      let note = notes[index % notes.length];
-      index = index + (i || 1);
-      return note;
-    }
-  };
+function createModeIntervals (interval) {
+  return range(interval.length).map((_, i) => rotateString(interval.split(''), i));
 }
 
-export function scale (intervals, root) {
+function scale (intervals, root) {
   let R = scaleRange(root);
   let modeIntervals = createModeIntervals(intervals);
   return modeIntervals.map(interval => interval.map(Number).map(R.next));
-}
-
-function createModeIntervals (interval) {
-  return range(interval.length).map((_, i) => rotateString(interval.split(''), i));
 }

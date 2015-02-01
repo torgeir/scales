@@ -6,25 +6,36 @@ import {scaleRange} from './scales';
 
 import '../less/guitar-string.less';
 
-export default component(function GuitarString ({key, root, frets, scales, selectedModes, selectedScales}) {
+export default component(function GuitarString ({key, root, frets, scales, selection}) {
   let noteRange = scaleRange(root);
-  let notes = frets.toArray().map(_ => noteRange.next());
+  let fretNotes = frets.toArray().map(_ => noteRange.next());
+
+  let selectedModes = selection.map(scale => scale.get('mode'));
 
   return <ul key={key} className="guitar-string">
     {frets.toArray().map((_, i) => {
-      let fretNote = notes[i];
-      let dots = scales.toArray().reduce((acc, scale, idx) => {
-        let mode = selectedModes[idx];
-        let scaleMode = scale.get('modes').get(mode);
-        let scaleHasNote = scaleMode.get('notes').indexOf(fretNote) !== -1;
-        let scaleRoot = scale.get('note');
-        if (scaleHasNote) {
-          acc.push({ color: scaleMode.get('color'), note: fretNote, isRoot: fretNote === scaleRoot });
-        }
-        return acc;
-      }, []);
-      let hasAllDots = (dots.length > 1 && dots.length === selectedScales.count());
-      return <GuitarFret key={i} note={fretNote} dots={dots} hasAllNotes={hasAllDots} />
+      let fretNote = fretNotes[i];
+      let dots = getDotsForFret(scales.toArray(), selectedModes.toArray(), fretNote);
+      let hasAllNotes = (dots.length > 1 && dots.length === selection.count());
+      return <GuitarFret key={i} note={fretNote} dots={dots} hasAllNotes={hasAllNotes} />
     })}
   </ul>
 }).jsx;
+
+function getDotsForFret (scales, selectedModes, fretNote) {
+  return scales.reduce((dots, scale, i) => {
+    let notesAndColor = scale.get('modes').get(selectedModes[i]);
+    let scaleHasNote = notesAndColor.get('notes').indexOf(fretNote) !== -1;
+    if (!scaleHasNote) {
+      return dots;
+    }
+
+    dots.push({
+      note: fretNote,
+      color: notesAndColor.get('color'),
+      isRoot: fretNote === scale.get('note')
+    });
+
+    return dots;
+  }, []);
+}

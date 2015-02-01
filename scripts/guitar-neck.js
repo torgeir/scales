@@ -6,16 +6,15 @@ import GuitarString from './guitar-string';
 
 import '../less/guitar-neck.less';
 
-export default component(function GuitarNeck ({guitar, scales, selectedModes, selectedScales}) {
-  return <div className="guitar-neck">
-    {guitar.cursor('strings').toArray().map((root, i) =>
+export default component(({strings, frets, scales, selection}) =>
+  <div className="guitar-neck">
+    {strings.toArray().map((root, i) =>
       <GuitarString key={i}
                     root={root}
-                    frets={guitar.cursor('frets')}
+                    frets={frets}
                     scales={scales}
-                    selectedModes={selectedModes}
-                    selectedScales={selectedScales}/>
+                    selection={selection} />
     )}
-    <GuitarFretNumbers numbers={guitar.cursor('frets')}/>
+    <GuitarFretNumbers numbers={frets}/>
   </div>
-}).jsx;
+).jsx;

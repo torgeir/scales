@@ -3,7 +3,7 @@ import component from 'omniscient';
 
 import Button from './button';
 
-export default component(function ButtonAddAfter ({cursor, index, className, addFn}) {
-  let onClick = e => cursor.update(cursor => cursor.splice(index + 1, 0, addFn()));
+export default component(function ButtonAddAfter ({cursor, index, className, adder}) {
+  let onClick = _ => cursor.update(list => list.splice(index + 1, 0, adder(index)));
   return <Button className={className} onClick={onClick}>+</Button>;
 }).jsx;
